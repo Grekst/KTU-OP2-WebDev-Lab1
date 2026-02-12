@@ -11,9 +11,6 @@
         <div>
             <asp:Label ID="Label1" runat="server" Text="Duomenų failas"></asp:Label>
             <br />
-            <asp:FileUpload ID="FileUpload1" runat="server" />
-            <br />
-            <br />
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Generuoti" />
         </div>
     </form>
