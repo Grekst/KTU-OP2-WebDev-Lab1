@@ -17,7 +17,7 @@ namespace Laboratorinis_1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (!FileUpload1.HasFile) return;
+            TaskUtils.ReadFile(FileUpload1.PostedFile);
         }
     }
 }
