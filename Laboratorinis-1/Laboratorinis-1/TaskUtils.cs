@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
@@ -11,6 +12,24 @@ namespace Laboratorinis_1
         public static void ReadFile(HttpPostedFile file)
         {
             if (!ValidateFile(file).validity) return;
+
+            using (StreamReader reader = new StreamReader(file.InputStream))
+            {
+                if (!int.TryParse(reader.ReadLine(), out int n)) return;
+
+                char[,] componentMatrix = new char[n, n];
+
+                for (int i = 0; i < n; i++)
+                {
+                    string line = reader.ReadLine();
+                    if (line == null) break;
+
+                    for (int j = 0; j < n; j++)
+                    {
+                        componentMatrix[i, j] = line[i];
+                    }
+                }
+            }
         }
 
         protected static (bool validity, string message) ValidateFile(HttpPostedFile file)

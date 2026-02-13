@@ -18,7 +18,7 @@
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Patvirtinti" />
             <br />
             <br />
-            <asp:Label ID="Label2" runat="server" ForeColor="Red" Text="*" Visible="False"></asp:Label>
+            <asp:Label ID="FileUploadErrorLabel" runat="server" ForeColor="Red" Text="*" Visible="False"></asp:Label>
             <br />
             <asp:Table ID="Table1" runat="server" Width="100%">
             </asp:Table>
