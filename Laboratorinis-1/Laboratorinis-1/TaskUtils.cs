@@ -9,37 +9,72 @@ namespace Laboratorinis_1
 {
     public class TaskUtils
     {
-        public static void ReadFile(HttpPostedFile file)
+        public static Scorpion ReadFromText(string text)
         {
-            if (!ValidateFile(file).validity) return;
-
-            using (StreamReader reader = new StreamReader(file.InputStream))
+            using (StringReader reader = new StringReader(text))
             {
-                if (!int.TryParse(reader.ReadLine(), out int n)) return;
+                //First line validity check
+                string firstLine = reader.ReadLine();
+                if (string.IsNullOrEmpty(firstLine) || !int.TryParse(firstLine.Trim(), out int elementCount)) return null;
 
-                char[,] componentMatrix = new char[n, n];
-
-                for (int i = 0; i < n; i++)
+                //Create matrix
+                char[,] matrix = new char[elementCount, elementCount];
+                for (int i = 0; i < elementCount; i++)
                 {
                     string line = reader.ReadLine();
                     if (line == null) break;
 
-                    for (int j = 0; j < n; j++)
+                    string tikriSimboliai = line.Replace(" ", "").Trim();
+                    for (int j = 0; j < elementCount; j++)
                     {
-                        componentMatrix[i, j] = line[i];
+                        if (j < tikriSimboliai.Length)
+                            matrix[i, j] = tikriSimboliai[j];
+                        else
+                            matrix[i, j] = '-';
                     }
                 }
+
+                //Create a new animal from read data
+                return new Scorpion(elementCount, matrix);
             }
         }
 
-        protected static (bool validity, string message) ValidateFile(HttpPostedFile file)
+
+        //public static Scorpion ReadFile(HttpPostedFile file)
+        //{
+        //    using (StreamReader reader = new StreamReader(file.InputStream))
+        //    {
+        //        string line = reader.ReadLine();
+        //        if (string.IsNullOrEmpty(line) || !int.TryParse(line.Trim(), out int n)) return null;
+
+        //        char[,] matrix = new char[n, n];
+        //        for (int i = 0; i < n; i++)
+        //        {
+        //            string line = reader.ReadLine();
+        //            if (line == null) break;
+
+        //            string tikriSimboliai = eilute.Replace(" ", "").Trim();
+
+        //            for (int j = 0; j < n; j++)
+        //            {
+        //                if (j < tikriSimboliai.Length)
+        //                    matrix[i, j] = tikriSimboliai[j];
+        //                else
+        //                    matrix[i, j] = '-';
+        //            }
+        //        }
+        //        return new Scorpion(n, matrix);
+        //    }
+        //}
+
+        public static (bool validity, string message) ValidateFile(HttpPostedFile file)
         {
             if (file == null || file.ContentLength == 0)
-                return (false, "No file found");
+                return (false, "Failas nerastas");
             if (System.IO.Path.GetExtension(file.FileName).ToLower() != ".txt")
-                return (false, "Invalid file type. Should be .txt");
+                return (false, string.Format("Failo tipas ( {0} ) yra netinkamas. Reikalinga: .txt", System.IO.Path.GetExtension(file.FileName).ToLower()));
 
-            return (true, "All checks passed. Proceed");
+            return (true, "Viskas gerai");
         }
     }
 }
