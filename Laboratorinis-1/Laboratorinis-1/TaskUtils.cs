@@ -22,7 +22,7 @@ namespace Laboratorinis_1
                 for (int i = 0; i < elementCount; i++)
                 {
                     string line = reader.ReadLine();
-                    if (line == null) break;
+                    if (line == null) return null;
 
                     string tikriSimboliai = line.Replace(" ", "").Trim();
                     for (int j = 0; j < elementCount; j++)

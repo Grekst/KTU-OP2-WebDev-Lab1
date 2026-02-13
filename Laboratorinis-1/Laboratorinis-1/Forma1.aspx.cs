@@ -15,22 +15,6 @@ namespace Laboratorinis_1
             FileUploadErrorLabel.Visible = false;
         }
 
-        protected void CalculationButton_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(DataTextBox.Text))
-            {
-                Scorpion sk = TaskUtils.ReadFromText(DataTextBox.Text);
-                if (sk != null)
-                {
-                    ResultTextBox.Text = sk.Analize();
-                }
-                else
-                {
-                    ResultTextBox.Text = "Klaida: Netinkamas duomenų formatas tekstiniame lauke.";
-                }
-            }
-        }
-
         protected void UploadButton_Click(object sender, EventArgs e)
         {
             FileUploadErrorLabel.Visible = false;
@@ -48,7 +32,7 @@ namespace Laboratorinis_1
                         DataTextBox.Text = content;
 
                         FileUploadErrorLabel.Visible = true;
-                        FileUploadErrorLabel.Text = "Failas sėkmingai įkeltas į redaktorių.";
+                        FileUploadErrorLabel.Text = "Failas sėkmingai įkeltas.";
                         FileUploadErrorLabel.ForeColor = System.Drawing.Color.Green;
                     }
                 }
@@ -67,6 +51,25 @@ namespace Laboratorinis_1
                 FileUploadErrorLabel.ForeColor = System.Drawing.Color.Red;
 
                 DataTextBox.Text = "";
+            }
+        }
+
+        protected void CalculationButton_Click(object sender, EventArgs e)
+        {
+            ResultTextBox.Text = "";
+
+
+            if (!string.IsNullOrEmpty(DataTextBox.Text))
+            {
+                Scorpion sk = TaskUtils.ReadFromText(DataTextBox.Text);
+                if (sk != null)
+                {
+                    ResultTextBox.Text = sk.Analize();
+                }
+                else
+                {
+                    ResultTextBox.Text = "Klaida: Netinkamas duomenų formatas tekstiniame lauke.";
+                }
             }
         }
     }

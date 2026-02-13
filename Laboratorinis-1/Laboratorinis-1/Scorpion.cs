@@ -10,10 +10,10 @@ namespace Laboratorinis_1
         public int ElementCount { get; private set; }
         public char[,] Matrix { get; private set; }
 
-        public Scorpion(int n, char[,] matrix)
+        public Scorpion(int elCnt, char[,] mat)
         {
-            ElementCount = n;
-            Matrix = matrix;
+            ElementCount = elCnt;
+            Matrix = mat;
         }
 
         public bool CheckIfConnected(int body, int current, int stinger)
@@ -46,23 +46,25 @@ namespace Laboratorinis_1
         {
             for (int i = 0; i < ElementCount; i++)
             {
-                var neighbors = GetNeighbors(i);
-                if (neighbors.Count == 1)
+                var gNeighbors = GetNeighbors(i);
+                // 1. Geluonis turi turėti tik 1 kaimyną (uodegą)
+                if (gNeighbors.Count == 1)
                 {
                     int stinger = i;
-                    int tail = neighbors[0];
-                    var tailNeighbors = GetNeighbors(tail);
+                    int tail = gNeighbors[0];
+                    var uNeighbors = GetNeighbors(tail);
 
-                    if (tailNeighbors.Count == 2)
+                    // 2. Uodega turi būti sujungta su geluonimi ir liemeniu (dažniausiai laipsnis 2)
+                    if (uNeighbors.Count == 2)
                     {
-                        int body = tailNeighbors[0] == stinger ? tailNeighbors[1] : tailNeighbors[0];
+                        int body = uNeighbors[0] == stinger ? uNeighbors[1] : uNeighbors[0];
+                        var bNeighbors = GetNeighbors(body);
 
-                        if (GetNeighbors(body).Count == ElementCount - 2)
+                        // 3. Liemuo turi būti sujungtas su visais, išskyrus geluonį (ir save)
+                        // Tad laipsnis turi būti n - 2
+                        if (bNeighbors.Count == ElementCount - 2 && !bNeighbors.Contains(stinger))
                         {
-                            if (CheckIfConnected(body, 0, stinger))
-                            {
-                                return GenerateAnswer(stinger, tail, body);
-                            }
+                            return GenerateAnswer(stinger, tail, body);
                         }
                     }
                 }
