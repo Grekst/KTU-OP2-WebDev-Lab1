@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Laboratorinis_1
 {
@@ -15,12 +10,18 @@ namespace Laboratorinis_1
             FileUploadErrorLabel.Visible = false;
         }
 
+        /// <summary>
+        /// Runs the uploaded file validation and translation logic
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void UploadButton_Click(object sender, EventArgs e)
         {
             FileUploadErrorLabel.Visible = false;
 
             var check = TaskUtils.ValidateFile(FileUpload1.PostedFile);
 
+            // Only runs if a file has been uploaded
             if (check.validity)
             {
                 try
@@ -32,7 +33,7 @@ namespace Laboratorinis_1
                         DataTextBox.Text = content;
 
                         FileUploadErrorLabel.Visible = true;
-                        FileUploadErrorLabel.Text = "Failas sėkmingai įkeltas.";
+                        FileUploadErrorLabel.Text = "Failas sėkmingai nuskaitytas.";
                         FileUploadErrorLabel.ForeColor = System.Drawing.Color.Green;
                     }
                 }
@@ -54,6 +55,11 @@ namespace Laboratorinis_1
             }
         }
 
+        /// <summary>
+        /// Runs the analizer script
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void CalculationButton_Click(object sender, EventArgs e)
         {
             ResultTextBox.Text = "";

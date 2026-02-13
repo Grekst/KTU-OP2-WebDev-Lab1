@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace Laboratorinis_1
 {
     public class Scorpion
     {
-        public int ElementCount { get; private set; }
-        public char[,] Matrix { get; private set; }
+        public int ElementCount { get; private set; } //How many body parts are there
+        public char[,] Matrix { get; private set; } //A matrix displaying the linke between body parts.
+                                                    // '*' - current element
+                                                    // '+' - connection to element at index
+                                                    // '-' - no connection to element at index
+
 
         public Scorpion(int elCnt, char[,] mat)
         {
@@ -16,6 +17,13 @@ namespace Laboratorinis_1
             Matrix = mat;
         }
 
+        /// <summary>
+        /// Checks if the element is conn
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="current"></param>
+        /// <param name="stinger"></param>
+        /// <returns></returns>
         public bool CheckIfConnected(int body, int current, int stinger)
         {
             if (current == ElementCount) return true;
@@ -32,36 +40,44 @@ namespace Laboratorinis_1
             return CheckIfConnected(body, current + 1, stinger);
         }
 
-        private List<int> GetNeighbors(int v)
+        /// <summary>
+        /// Gets the list of elements neighboring the current one. (Marked with '+')
+        /// </summary>
+        /// <param name="index">Current element index</param>
+        /// <returns></returns>
+        private List<int> GetNeighbors(int index)
         {
             List<int> neighbor = new List<int>();
             for (int j = 0; j < ElementCount; j++)
             {
-                if (Matrix[v, j] == '+') neighbor.Add(j);
+                if (Matrix[index, j] == '+') neighbor.Add(j);
             }
             return neighbor;
         }
 
+        /// <summary>
+        /// Analizes if the provided body part matrix fits the requirements to be a scorpion
+        /// </summary>
+        /// <returns></returns>
         public string Analize()
         {
             for (int i = 0; i < ElementCount; i++)
             {
                 var gNeighbors = GetNeighbors(i);
-                // 1. Geluonis turi turėti tik 1 kaimyną (uodegą)
+                // Checks if body part element is the stringer. (May only have 1 neighbor)
                 if (gNeighbors.Count == 1)
                 {
                     int stinger = i;
                     int tail = gNeighbors[0];
                     var uNeighbors = GetNeighbors(tail);
 
-                    // 2. Uodega turi būti sujungta su geluonimi ir liemeniu (dažniausiai laipsnis 2)
+                    // Checks if the body part is a tail. (Has to be connected to stinger and body)
                     if (uNeighbors.Count == 2)
                     {
                         int body = uNeighbors[0] == stinger ? uNeighbors[1] : uNeighbors[0];
                         var bNeighbors = GetNeighbors(body);
 
-                        // 3. Liemuo turi būti sujungtas su visais, išskyrus geluonį (ir save)
-                        // Tad laipsnis turi būti n - 2
+                        // Body has to be connected to everything
                         if (bNeighbors.Count == ElementCount - 2 && !bNeighbors.Contains(stinger))
                         {
                             return GenerateAnswer(stinger, tail, body);
@@ -72,16 +88,25 @@ namespace Laboratorinis_1
             return "Grafas nėra skorpionas.";
         }
 
-        private string GenerateAnswer(int g, int u, int l)
+        /// <summary>
+        /// Generates a formatted answer if the object is a scorpion
+        /// </summary>
+        /// <param name="stringer"></param>
+        /// <param name="tail"></param>
+        /// <param name="body"></param>
+        /// <returns>A formatted result string</returns>
+        private string GenerateAnswer(int stringer, int tail, int body)
         {
             string res = "Grafas yra 'skorpionas'\n" +
-                         $"Geluonis: {g + 1} virsune\n" +
-                         $"Uodega: {u + 1} virsune\n" +
-                         $"Liemuo: {l + 1} virsune\n";
+                         $"Geluonis: {stringer + 1} virsune\n" +
+                         $"Uodega: {tail + 1} virsune\n" +
+                         $"Liemuo: {body + 1} virsune\n";
             int legNr = 1;
+
+            // Returns a list of legs and their index
             for (int i = 0; i < ElementCount; i++)
             {
-                if (i != g && i != u && i != l)
+                if (i != stringer && i != tail && i != body)
                 {
                     res += $"{legNr} koja: {i + 1} virsune\n";
                     legNr++;

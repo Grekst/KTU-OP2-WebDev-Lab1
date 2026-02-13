@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
+﻿using System.IO;
 using System.Web;
 
 namespace Laboratorinis_1
@@ -22,13 +18,13 @@ namespace Laboratorinis_1
                 for (int i = 0; i < elementCount; i++)
                 {
                     string line = reader.ReadLine();
-                    if (line == null) return null;
+                    if (line == null) return null; //Stop everything if too little lines than required by elementCount
 
-                    string tikriSimboliai = line.Replace(" ", "").Trim();
+                    string realSymbols = line.Replace(" ", "").Trim(); //Delete spaces
                     for (int j = 0; j < elementCount; j++)
                     {
-                        if (j < tikriSimboliai.Length)
-                            matrix[i, j] = tikriSimboliai[j];
+                        if (j < realSymbols.Length)
+                            matrix[i, j] = realSymbols[j];
                         else
                             matrix[i, j] = '-';
                     }
@@ -39,40 +35,18 @@ namespace Laboratorinis_1
             }
         }
 
-
-        //public static Scorpion ReadFile(HttpPostedFile file)
-        //{
-        //    using (StreamReader reader = new StreamReader(file.InputStream))
-        //    {
-        //        string line = reader.ReadLine();
-        //        if (string.IsNullOrEmpty(line) || !int.TryParse(line.Trim(), out int n)) return null;
-
-        //        char[,] matrix = new char[n, n];
-        //        for (int i = 0; i < n; i++)
-        //        {
-        //            string line = reader.ReadLine();
-        //            if (line == null) break;
-
-        //            string tikriSimboliai = eilute.Replace(" ", "").Trim();
-
-        //            for (int j = 0; j < n; j++)
-        //            {
-        //                if (j < tikriSimboliai.Length)
-        //                    matrix[i, j] = tikriSimboliai[j];
-        //                else
-        //                    matrix[i, j] = '-';
-        //            }
-        //        }
-        //        return new Scorpion(n, matrix);
-        //    }
-        //}
-
+        /// <summary>
+        /// Runs a basic validation of the uploaded file. (Is it a .txt file, and is it filled)
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static (bool validity, string message) ValidateFile(HttpPostedFile file)
         {
-            if (file == null || file.ContentLength == 0)
-                return (false, "Failas nerastas");
-            if (System.IO.Path.GetExtension(file.FileName).ToLower() != ".txt")
+            if (System.IO.Path.GetExtension(file.FileName).ToLower() != ".txt") //Is it a .txt file?
                 return (false, string.Format("Failo tipas ( {0} ) yra netinkamas. Reikalinga: .txt", System.IO.Path.GetExtension(file.FileName).ToLower()));
+
+            if (file == null || file.ContentLength == 0) //Does file exist?
+                return (false, "Failas nerastas");
 
             return (true, "Viskas gerai");
         }
