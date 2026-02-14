@@ -78,7 +78,7 @@ namespace Laboratorinis_1
                         var bNeighbors = GetNeighbors(body);
 
                         // Body has to be connected to everything
-                        if (bNeighbors.Count == ElementCount - 2 && !bNeighbors.Contains(stinger))
+                        if (CheckIfConnected(body, 0, stinger))
                         {
                             return GenerateAnswer(stinger, tail, body);
                         }

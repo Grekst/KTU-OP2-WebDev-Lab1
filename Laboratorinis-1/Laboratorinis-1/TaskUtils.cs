@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 
 namespace Laboratorinis_1
@@ -12,6 +13,8 @@ namespace Laboratorinis_1
                 //First line validity check
                 string firstLine = reader.ReadLine();
                 if (string.IsNullOrEmpty(firstLine) || !int.TryParse(firstLine.Trim(), out int elementCount)) return null;
+
+                if (elementCount < 5 || elementCount > 50) return null;
 
                 //Create matrix
                 char[,] matrix = new char[elementCount, elementCount];
