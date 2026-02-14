@@ -9,8 +9,6 @@ namespace Laboratorinis_1
                                                     // '*' - current element
                                                     // '+' - connection to element at index
                                                     // '-' - no connection to element at index
-
-
         public Scorpion(int elCnt, char[,] mat)
         {
             ElementCount = elCnt;

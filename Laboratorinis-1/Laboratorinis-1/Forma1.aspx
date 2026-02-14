@@ -16,19 +16,6 @@
             <label for="<%=FileUpload1.ClientID%>" class="custom-file-upload">
                 Įkelti iš kompiuterio
             </label>
-            <br />
-            <span id="fileNameDisplay">Nėra failo</span>
-            <br />
-
-            <script>
-                function triggerAutoUpload(input) {
-                    if (input.files && input.files[0]) {
-                        document.getElementById('fileNameDisplay').innerHTML = "Kraunama: " + input.files[0].name;
-
-                        document.getElementById('<%= UploadButton.ClientID %>').click();
-                    }
-                }
-            </script>
 
             <br />
             <asp:Button ID="UploadButton" runat="server" Text="Įkelti" OnClick="UploadButton_Click"
@@ -41,7 +28,7 @@
 
         <div>
             <br />
-            <asp:Label ID="Label2" runat="server" Text="Pradiniai duomenys"></asp:Label>
+            <asp:Label ID="Label2" runat="server" Text="Įrašykite pradinius duomenis"></asp:Label>
             <br />
             <asp:TextBox class="result-textbox" ID="DataTextBox" runat="server" BorderStyle="Solid"
                 ReadOnly="false" TextMode="MultiLine"></asp:TextBox>
