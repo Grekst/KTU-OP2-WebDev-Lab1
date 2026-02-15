@@ -16,6 +16,18 @@
             <label for="<%=FileUpload1.ClientID%>" class="custom-file-upload">
                 Įkelti iš kompiuterio
             </label>
+            <span id="fileNameDisplay">Nėra failo</span>
+            <br />
+
+            <script>
+                function triggerAutoUpload(input) {
+                    if (input.files && input.files[0]) {
+                        document.getElementById('fileNameDisplay').innerHTML = "Kraunama: " + input.files[0].name;
+
+                        document.getElementById('<%= UploadButton.ClientID %>').click();
+                    }
+                }
+            </script>
 
             <br />
             <asp:Button ID="UploadButton" runat="server" Text="Įkelti" OnClick="UploadButton_Click"
