@@ -28,11 +28,7 @@
 
             <br />
 
-            <asp:Button ID="UploadInternalButton" runat="server" Text="Įkelti pavyzdį (Iš App_Data)" BorderStyle="None" CssClass="button-green" OnClick="UploadInternalButton_Click" />
-
-            <br />
-            <br />
-            <asp:Button ID="Button1" runat="server" BorderStyle="None" CssClass="upload-internal-button" Text="Button" />
+            <asp:Button ID="UploadInternalButton" runat="server" Text="Įkelti pavyzdį (Iš App_Data)" BorderStyle="None" CssClass="upload-internal-button" OnClick="UploadInternalButton_Click" />
 
             <br />
         </div>

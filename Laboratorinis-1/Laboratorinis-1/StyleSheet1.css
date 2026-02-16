@@ -11,7 +11,7 @@
 }
 
 .upload-internal-button {
-    background-color: #F5A034;
+    background-color: #52b788;
     color: black;
     padding: 10px 20px;
     cursor: pointer;
@@ -20,7 +20,8 @@
 }
 
     .upload-internal-button:hover {
-        background-color: #BB7B27;
+        background-color: #2d6a4f;
+        color: white;
     }
 
 .result-textbox {
