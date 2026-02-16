@@ -26,16 +26,11 @@ namespace Laboratorinis_1
             {
                 try
                 {
-                    using (StreamReader reader = new StreamReader(FileUpload1.PostedFile.InputStream))
-                    {
-                        string content = reader.ReadToEnd();
+                    DataTextBox.Text = InOutUtils.ReadFileData(FileUpload1.PostedFile);
 
-                        DataTextBox.Text = content;
-
-                        FileUploadErrorLabel.Visible = true;
-                        FileUploadErrorLabel.Text = "Failas sėkmingai nuskaitytas.";
-                        FileUploadErrorLabel.ForeColor = System.Drawing.Color.Green;
-                    }
+                    FileUploadErrorLabel.Visible = true;
+                    FileUploadErrorLabel.Text = "Failas sėkmingai nuskaitytas.";
+                    FileUploadErrorLabel.ForeColor = System.Drawing.Color.Green;
                 }
                 catch (Exception ex)
                 {
@@ -67,16 +62,35 @@ namespace Laboratorinis_1
 
             if (!string.IsNullOrEmpty(DataTextBox.Text))
             {
-                Scorpion sk = TaskUtils.ReadFromText(DataTextBox.Text);
+                Scorpion sk = InOutUtils.ReadFromText(DataTextBox.Text);
                 if (sk != null)
                 {
-                    ResultTextBox.Text = sk.Analize();
+                    ResultTextBox.Text = TaskUtils.Analize(sk);
                 }
                 else
                 {
                     ResultTextBox.Text = "Klaida: Netinkamas duomenų formatas tekstiniame lauke.";
                 }
             }
+        }
+
+        protected void WriteToAppData_Button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void UploadInternalButton_Click(object sender, EventArgs e)
+        {
+            FileUploadErrorLabel.Visible = false;
+
+            string path = Server.MapPath("~/Data/PradiniaiDuomenys.txt");
+            string data = InOutUtils.ReadFileDataFromInternal(path);
+
+            DataTextBox.Text = data;
+
+            FileUploadErrorLabel.Visible = true;
+            FileUploadErrorLabel.Text = "Failas sėkmingai nuskaitytas.";
+            FileUploadErrorLabel.ForeColor = System.Drawing.Color.Green;
         }
     }
 }

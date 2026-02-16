@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
 
@@ -6,38 +7,6 @@ namespace Laboratorinis_1
 {
     public class TaskUtils
     {
-        public static Scorpion ReadFromText(string text)
-        {
-            using (StringReader reader = new StringReader(text))
-            {
-                //First line validity check
-                string firstLine = reader.ReadLine();
-                if (string.IsNullOrEmpty(firstLine) || !int.TryParse(firstLine.Trim(), out int elementCount)) return null;
-
-                if (elementCount < 5 || elementCount > 50) return null;
-
-                //Create matrix
-                char[,] matrix = new char[elementCount, elementCount];
-                for (int i = 0; i < elementCount; i++)
-                {
-                    string line = reader.ReadLine();
-                    if (line == null) return null; //Stop everything if too little lines than required by elementCount
-
-                    string realSymbols = line.Replace(" ", "").Trim(); //Delete spaces
-                    for (int j = 0; j < elementCount; j++)
-                    {
-                        if (j < realSymbols.Length)
-                            matrix[i, j] = realSymbols[j];
-                        else
-                            matrix[i, j] = '-';
-                    }
-                }
-
-                //Create a new animal from read data
-                return new Scorpion(elementCount, matrix);
-            }
-        }
-
         /// <summary>
         /// Runs a basic validation of the uploaded file. (Is it a .txt file, and is it filled)
         /// </summary>
@@ -52,6 +21,104 @@ namespace Laboratorinis_1
                 return (false, "Failas nerastas");
 
             return (true, "Viskas gerai");
+        }
+
+        /// <summary>
+        /// Checks if the element is conn
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="current"></param>
+        /// <param name="stinger"></param>
+        /// <returns></returns>
+        public static bool CheckIfConnected(Scorpion graph, int body, int current, int stinger)
+        {
+            if (current == graph.ElementCount) return true;
+
+            if (current != body && current != stinger)
+            {
+                if (graph.GetMatrixValue(body, current) != '+') return false;
+            }
+            if (current == stinger)
+            {
+                if (graph.GetMatrixValue(body, current) == '+') return false;
+            }
+
+            return CheckIfConnected(graph, body, current + 1, stinger);
+        }
+
+        /// <summary>
+        /// Gets the list of elements neighboring the current one. (Marked with '+')
+        /// </summary>
+        /// <param name="index">Current element index</param>
+        /// <returns></returns>
+        private static List<int> GetNeighbors(Scorpion graph, int index)
+        {
+            List<int> neighbor = new List<int>();
+            for (int j = 0; j < graph.ElementCount; j++)
+            {
+                if (graph.GetMatrixValue(index, j) == '+') neighbor.Add(j);
+            }
+            return neighbor;
+        }
+
+        /// <summary>
+        /// Analizes if the provided body part matrix fits the requirements to be a scorpion
+        /// </summary>
+        /// <returns></returns>
+        public static string Analize(Scorpion graph)
+        {
+            for (int i = 0; i < graph.ElementCount; i++)
+            {
+                var gNeighbors = GetNeighbors(graph, i);
+                // Checks if body part element is the stringer. (May only have 1 neighbor)
+                if (gNeighbors.Count == 1)
+                {
+                    int stinger = i;
+                    int tail = gNeighbors[0];
+                    var uNeighbors = GetNeighbors(graph, tail);
+
+                    // Checks if the body part is a tail. (Has to be connected to stinger and body)
+                    if (uNeighbors.Count == 2)
+                    {
+                        int body = uNeighbors[0] == stinger ? uNeighbors[1] : uNeighbors[0];
+                        var bNeighbors = GetNeighbors(graph, body);
+
+                        // Body has to be connected to everything
+                        if (CheckIfConnected(graph, body, 0, stinger))
+                        {
+                            return GenerateAnswer(graph, stinger, tail, body);
+                        }
+                    }
+                }
+            }
+            return "Grafas nėra skorpionas.";
+        }
+
+        /// <summary>
+        /// Generates a formatted answer if the object is a scorpion
+        /// </summary>
+        /// <param name="stringer"></param>
+        /// <param name="tail"></param>
+        /// <param name="body"></param>
+        /// <returns>A formatted result string</returns>
+        public static string GenerateAnswer(Scorpion graph, int stringer, int tail, int body)
+        {
+            string res = "Grafas yra 'skorpionas'\n" +
+                         $"Geluonis: {stringer + 1} virsune\n" +
+                         $"Uodega: {tail + 1} virsune\n" +
+                         $"Liemuo: {body + 1} virsune\n";
+            int legNr = 1;
+
+            // Returns a list of legs and their index
+            for (int i = 0; i < graph.ElementCount; i++)
+            {
+                if (i != stringer && i != tail && i != body)
+                {
+                    res += $"{legNr} koja: {i + 1} virsune\n";
+                    legNr++;
+                }
+            }
+            return res;
         }
     }
 }

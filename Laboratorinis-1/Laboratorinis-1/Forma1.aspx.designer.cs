@@ -42,6 +42,15 @@ namespace Laboratorinis_1
         protected global::System.Web.UI.WebControls.Button UploadButton;
 
         /// <summary>
+        /// UploadInternalButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UploadInternalButton;
+
+        /// <summary>
         /// ValidationSummary1 control.
         /// </summary>
         /// <remarks>
@@ -103,5 +112,14 @@ namespace Laboratorinis_1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ResultTextBox;
+
+        /// <summary>
+        /// WriteToAppData_Button control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button WriteToAppData_Button;
     }
 }

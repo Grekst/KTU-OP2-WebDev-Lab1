@@ -17,17 +17,29 @@
     overflow-x: auto;
 }
 
-.copy-button {
-    background-color: #55DB41;
-    color: black;
+.custom-file-upload {
+    background-color: #007bff;
+    color: white;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 4px;
     display: inline-block;
 }
 
-    .copy-button:hover {
-        background-color: #3FA130;
+    .custom-file-upload:hover {
+        background-color: #0056b3;
+    }
+
+.upload-internal-button {
+    background-color: #F5A034;
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+    .upload-internal-button:hover {
+        background-color: #BB7B27;
     }
 
 .calculate-button {
@@ -41,17 +53,4 @@
 
     .calculate-button:hover {
         background-color: #BB7B27;
-    }
-
-.custom-file-upload {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    display: inline-block;
-}
-
-    .custom-file-upload:hover {
-        background-color: #0056b3;
     }
