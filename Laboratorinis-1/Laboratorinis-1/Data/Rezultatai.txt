@@ -1,0 +1,6 @@
+Grafas yra 'skorpionas'
+Geluonis: 2 virsune
+Uodega: 1 virsune
+Liemuo: 4 virsune
+1 koja: 3 virsune
+2 koja: 5 virsune

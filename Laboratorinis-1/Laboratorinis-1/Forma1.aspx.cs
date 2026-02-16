@@ -8,6 +8,7 @@ namespace Laboratorinis_1
         protected void Page_Load(object sender, EventArgs e)
         {
             FileUploadErrorLabel.Visible = false;
+            FileWriteErrorLabel.Visible = false;
         }
 
         /// <summary>
@@ -74,11 +75,30 @@ namespace Laboratorinis_1
             }
         }
 
+        /// <summary>
+        /// Writes data from ResultTextBox to internal result file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void WriteToAppData_Button_Click(object sender, EventArgs e)
         {
+            if (ResultTextBox.Text == null) return;
 
+            string path = Server.MapPath("~/Data/Rezultatai.txt");
+            InOutUtils.PrintResultToFile(path, ResultTextBox.Text);
+
+            string contents = InOutUtils.ReadFileDataFromInternal(path);
+
+            FileWriteErrorLabel.Visible = true;
+            FileWriteErrorLabel.Text = String.Format("{0} \n {1}", "Failas sėkmingai įrašytas.", contents);
+            FileWriteErrorLabel.ForeColor = System.Drawing.Color.Green;
         }
 
+        /// <summary>
+        /// Reads data to DataTextBox from internal data file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void UploadInternalButton_Click(object sender, EventArgs e)
         {
             FileUploadErrorLabel.Visible = false;

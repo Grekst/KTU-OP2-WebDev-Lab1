@@ -28,7 +28,7 @@
 
             <br />
 
-            <asp:Button ID="UploadInternalButton" runat="server" Text="Įkelti pavyzdį (Iš App_Data)" BorderStyle="None" CssClass="upload-internal-button" OnClick="UploadInternalButton_Click" />
+            <asp:Button ID="UploadInternalButton" runat="server" Text="Įkelti pavyzdį iš App_Data" BorderStyle="None" CssClass="upload-internal-button" OnClick="UploadInternalButton_Click" />
 
             <br />
         </div>
@@ -62,7 +62,11 @@
                 ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
             <br />
             <br />
-            <asp:Button ID="WriteToAppData_Button" runat="server" Text="Rašyti į App_Data" CssClass="calculate-button" OnClick="WriteToAppData_Button_Click" BorderStyle="None" />
+            <asp:Button ID="WriteToAppData_Button" runat="server" Text="Rašyti rezultatus į App_Data" CssClass="upload-internal-button" OnClick="WriteToAppData_Button_Click" BorderStyle="None" />
+
+            <br />
+            <asp:Label ID="FileWriteErrorLabel" runat="server" ForeColor="Red" Text="*"></asp:Label>
+
         </div>
     </form>
 </body>

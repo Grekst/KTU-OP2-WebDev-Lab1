@@ -121,5 +121,14 @@ namespace Laboratorinis_1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button WriteToAppData_Button;
+
+        /// <summary>
+        /// FileWriteErrorLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label FileWriteErrorLabel;
     }
 }

@@ -49,10 +49,10 @@ namespace Laboratorinis_1
         }
 
         /// <summary>
-        /// Reads text from file
+        /// Reads text from a file uploaded by the user
         /// </summary>
         /// <param name="file">Posted file</param>
-        /// <returns></returns>
+        /// <returns>A string of read data</returns>
         public static string ReadFileData(HttpPostedFile file)
         {
             string content;
@@ -65,12 +65,14 @@ namespace Laboratorinis_1
             return content;
         }
 
+        /// <summary>
+        /// Reads data from internal file
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>A string of read data</returns>
         public static string ReadFileDataFromInternal(string filePath)
         {
             string[] content = File.ReadAllLines(filePath);
-
-            //string[] lines = File.ReadAllLines(filePath);
-            //return ParseLinesToGraph(lines);
 
             return String.Join("\n", content);
         }
@@ -82,6 +84,11 @@ namespace Laboratorinis_1
         /// <param name="result"></param>
         public static void PrintResultToFile(string filePath, string result)
         {
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath);
+            }
+
             File.WriteAllText(filePath, result);
         }
 

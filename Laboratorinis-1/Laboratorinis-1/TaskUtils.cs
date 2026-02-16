@@ -14,11 +14,16 @@ namespace Laboratorinis_1
         /// <returns></returns>
         public static (bool validity, string message) ValidateFile(HttpPostedFile file)
         {
-            if (System.IO.Path.GetExtension(file.FileName).ToLower() != ".txt") //Is it a .txt file?
+            if (System.IO.Path.GetExtension(file.FileName).ToLower() != ".txt")
+            {
                 return (false, string.Format("Failo tipas ( {0} ) yra netinkamas. Reikalinga: .txt", System.IO.Path.GetExtension(file.FileName).ToLower()));
+            }
 
-            if (file == null || file.ContentLength == 0) //Does file exist?
+
+            if (file == null || file.ContentLength == 0)
+            {
                 return (false, "Failas nerastas");
+            }
 
             return (true, "Viskas gerai");
         }
@@ -70,21 +75,20 @@ namespace Laboratorinis_1
             for (int i = 0; i < graph.ElementCount; i++)
             {
                 var gNeighbors = GetNeighbors(graph, i);
-                // Checks if body part element is the stringer. (May only have 1 neighbor)
-                if (gNeighbors.Count == 1)
+
+                if (gNeighbors.Count == 1) // Checks if body part element is the stringer. (May only have 1 neighbor)
                 {
                     int stinger = i;
                     int tail = gNeighbors[0];
                     var uNeighbors = GetNeighbors(graph, tail);
 
-                    // Checks if the body part is a tail. (Has to be connected to stinger and body)
-                    if (uNeighbors.Count == 2)
+                    if (uNeighbors.Count == 2) // Checks if the body part is a tail. (Has to be connected to stinger and body)
                     {
                         int body = uNeighbors[0] == stinger ? uNeighbors[1] : uNeighbors[0];
                         var bNeighbors = GetNeighbors(graph, body);
 
-                        // Body has to be connected to everything
-                        if (CheckIfConnected(graph, body, 0, stinger))
+
+                        if (CheckIfConnected(graph, body, 0, stinger)) // Body has to be connected to everything
                         {
                             return GenerateAnswer(graph, stinger, tail, body);
                         }
