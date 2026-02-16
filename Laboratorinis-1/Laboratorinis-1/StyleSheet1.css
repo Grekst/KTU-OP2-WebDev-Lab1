@@ -6,6 +6,23 @@
     padding: 40px;
 }
 
+.button-green {
+    background-color: #F5A034;
+}
+
+.upload-internal-button {
+    background-color: #F5A034;
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+    .upload-internal-button:hover {
+        background-color: #BB7B27;
+    }
+
 .result-textbox {
     width: auto;
     min-width: 300px;
@@ -30,17 +47,7 @@
         background-color: #0056b3;
     }
 
-.upload-internal-button {
-    background-color: #F5A034;
-    color: black;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-}
 
-    .upload-internal-button:hover {
-        background-color: #BB7B27;
-    }
 
 .calculate-button {
     background-color: #F5A034;

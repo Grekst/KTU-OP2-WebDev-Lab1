@@ -7,7 +7,7 @@
     <link href="StyleSheet1.css" rel="stylesheet" type="text/css" />
     <title>Skorpiono Grafo Analizė</title>
 </head>
-<body style="width: 1068px">
+<body>
     <form id="form1" runat="server">
         <div>
             <asp:FileUpload ID="FileUpload1" runat="server" ValidateRequestMode="Disabled" onchange="triggerAutoUpload(this)" Style="display: none;" />
@@ -16,7 +16,7 @@
                 Įkelti iš disko
             </label>
             <br />
-
+            <asp:Button ID="UploadButton" runat="server" Text="-" OnClick="UploadButton_Click" BorderStyle="None" Style="display: none;" />
             <script>
                 function triggerAutoUpload(input) {
                     if (input.files && input.files[0]) {
@@ -25,10 +25,14 @@
                 }
             </script>
 
-            <asp:Button ID="UploadButton" runat="server" Text="-" OnClick="UploadButton_Click" BorderStyle="None" Style="display: none;" />
+
             <br />
 
-            <asp:Button ID="UploadInternalButton" runat="server" Text="Įkelti pavyzdinį (Iš App_Data)" BorderStyle="None" CssClass="upload-internal-button" OnClick="UploadInternalButton_Click" />
+            <asp:Button ID="UploadInternalButton" runat="server" Text="Įkelti pavyzdį (Iš App_Data)" BorderStyle="None" CssClass="button-green" OnClick="UploadInternalButton_Click" />
+
+            <br />
+            <br />
+            <asp:Button ID="Button1" runat="server" BorderStyle="None" CssClass="upload-internal-button" Text="Button" />
 
             <br />
         </div>
