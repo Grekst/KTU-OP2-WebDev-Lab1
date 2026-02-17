@@ -112,5 +112,17 @@ namespace Laboratorinis_1
             FileUploadErrorLabel.Text = "Failas sėkmingai nuskaitytas.";
             FileUploadErrorLabel.ForeColor = System.Drawing.Color.Green;
         }
+
+        protected void UpdateStartingData_Click(object sender, EventArgs e)
+        {
+            string path = Server.MapPath("~/Data/PradiniaiDuomenys.txt");
+            string contents = DataTextBox.Text;
+
+            InOutUtils.UpdateInternalStartingData(path, contents);
+
+            FileWriteErrorLabel.Visible = true;
+            FileWriteErrorLabel.Text = String.Format("{0} \n {1}", "Failas sėkmingai įrašytas.", contents);
+            FileWriteErrorLabel.ForeColor = System.Drawing.Color.Green;
+        }
     }
 }

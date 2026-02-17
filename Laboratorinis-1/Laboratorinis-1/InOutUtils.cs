@@ -92,6 +92,16 @@ namespace Laboratorinis_1
             File.WriteAllText(filePath, result);
         }
 
+        public static void UpdateInternalStartingData(string filePath, string result)
+        {
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath);
+            }
+
+            File.WriteAllText(filePath, result);
+        }
+
 
     }
 }

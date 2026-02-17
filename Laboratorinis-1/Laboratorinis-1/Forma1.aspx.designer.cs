@@ -87,6 +87,15 @@ namespace Laboratorinis_1
         protected global::System.Web.UI.WebControls.TextBox DataTextBox;
 
         /// <summary>
+        /// UpdateStartingData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UpdateStartingData;
+
+        /// <summary>
         /// CalculationButton control.
         /// </summary>
         /// <remarks>
