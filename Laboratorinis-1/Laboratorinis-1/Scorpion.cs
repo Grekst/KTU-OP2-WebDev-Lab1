@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace Laboratorinis_1
+﻿namespace Laboratorinis_1
 {
     public class Scorpion
     {
         public int ElementCount { get; private set; } //How many body parts are there
+
         private char[,] Matrix;                       //A matrix displaying the linke between body parts.
                                                       // '*' - current element
                                                       // '+' - connection to element at index

@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Mime;
 using System.Web;
-using System.Web.UI.WebControls;
 
 namespace Laboratorinis_1
 {
     public class InOutUtils
     {
-
         /// <summary>
         /// Reads all data from textbox
         /// </summary>
@@ -92,6 +87,11 @@ namespace Laboratorinis_1
             File.WriteAllText(filePath, result);
         }
 
+        /// <summary>
+        /// Updates the internal example file in directory
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="result"></param>
         public static void UpdateInternalStartingData(string filePath, string result)
         {
             if (!File.Exists(filePath))

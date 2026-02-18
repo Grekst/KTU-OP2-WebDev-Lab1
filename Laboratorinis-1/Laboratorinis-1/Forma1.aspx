@@ -46,7 +46,6 @@
             <asp:TextBox class="result-textbox" ID="DataTextBox" runat="server" BorderStyle="Solid"
                 ReadOnly="false" TextMode="MultiLine"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="UpdateStartingData" runat="server" CssClass="upload-internal-button" Text="Rašyti pradinius duomenis į App_Data" BorderStyle="None" OnClick="UpdateStartingData_Click" />
             <br />
             <br />
             <asp:Button ID="CalculationButton" runat="server" OnClick="CalculationButton_Click"
@@ -67,6 +66,8 @@
             <asp:Button ID="WriteToAppData_Button" runat="server" Text="Rašyti rezultatus į App_Data" CssClass="upload-internal-button" OnClick="WriteToAppData_Button_Click" BorderStyle="None" />
 
             <br />
+            <br />
+            <asp:Button ID="UpdateStartingData" runat="server" CssClass="upload-internal-button" Text="Rašyti pradinius duomenis į App_Data" BorderStyle="None" OnClick="UpdateStartingData_Click" />
             <br />
 
             <br />

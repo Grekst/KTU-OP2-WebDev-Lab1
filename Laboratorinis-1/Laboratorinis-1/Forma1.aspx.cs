@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 
 namespace Laboratorinis_1
 {
@@ -113,6 +112,11 @@ namespace Laboratorinis_1
             FileUploadErrorLabel.ForeColor = System.Drawing.Color.Green;
         }
 
+        /// <summary>
+        /// This button updates the internal example file used in UploadInternalButton_Click()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void UpdateStartingData_Click(object sender, EventArgs e)
         {
             string path = Server.MapPath("~/Data/PradiniaiDuomenys.txt");
