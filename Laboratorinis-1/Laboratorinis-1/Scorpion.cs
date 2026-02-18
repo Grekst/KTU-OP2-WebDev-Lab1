@@ -1,4 +1,10 @@
-﻿namespace Laboratorinis_1
+﻿using Microsoft.SqlServer.Server;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+
+namespace Laboratorinis_1
 {
     public class Scorpion
     {
@@ -29,6 +35,11 @@
         public char GetMatrixValue(int i, int j)
         {
             return Matrix[i, j];
+        }
+
+        public override string ToString()
+        {
+            return string.Format("| {0, -10} | {1, -10} |", "Dalis", "Vieta grf.") + "\n";
         }
     }
 }

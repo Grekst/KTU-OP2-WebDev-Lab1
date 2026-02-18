@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 
 namespace Laboratorinis_1
@@ -105,10 +107,16 @@ namespace Laboratorinis_1
         /// <returns>A formatted result string</returns>
         public static string GenerateAnswer(Scorpion graph, int stringer, int tail, int body)
         {
-            string res = "Grafas yra 'skorpionas'\n" +
-                         $"Geluonis: {stringer + 1} virsune\n" +
-                         $"Uodega: {tail + 1} virsune\n" +
-                         $"Liemuo: {body + 1} virsune\n";
+            string res = new string('=', 27) +
+                "\n" +
+                graph.ToString() +
+                new string('=', 27) + "\n" +
+                string.Format("| {0, -10} | {1, 10} |\n", "Geluonis", stringer + 1) +
+                new string('-', 27) + "\n" +
+                string.Format("| {0, -10} | {1, 10} |\n", "Uodega", tail + 1) +
+                new string('-', 27) + "\n" +
+                string.Format("| {0, -10} | {1, 10} |\n", "Liemuo", body + 1) +
+                new string('-', 27) + "\n";
             int legNr = 1;
 
             // Returns a list of legs and their index
@@ -116,10 +124,12 @@ namespace Laboratorinis_1
             {
                 if (i != stringer && i != tail && i != body)
                 {
-                    res += $"{legNr} koja: {i + 1} virsune\n";
+                    res += string.Format("| {0, -10} | {1, 10} |{2}{3}", legNr + " koja", i + 1, '\n', new string('-', 27));
+                    res += '\n';
                     legNr++;
                 }
             }
+            res += "\nGrafas yra 'skorpionas'\n";
             return res;
         }
     }

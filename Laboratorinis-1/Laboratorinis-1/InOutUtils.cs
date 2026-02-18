@@ -83,7 +83,6 @@ namespace Laboratorinis_1
             {
                 File.Create(filePath);
             }
-
             File.WriteAllText(filePath, result);
         }
 
@@ -101,7 +100,5 @@ namespace Laboratorinis_1
 
             File.WriteAllText(filePath, result);
         }
-
-
     }
 }
