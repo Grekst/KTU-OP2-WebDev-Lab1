@@ -24,10 +24,7 @@
                     }
                 }
             </script>
-
-
             <br />
-
             <asp:Button ID="UploadInternalButton" runat="server" Text="Įkelti pavyzdį iš App_Data" BorderStyle="None" CssClass="upload-internal-button" OnClick="UploadInternalButton_Click" />
 
             <br />
